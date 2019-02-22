@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_movimientos_aragon_movimientos_aragon,movimientos_aragon.movimientos_aragon,model_movimientos_aragon_movimientos_aragon,,1,0,0,0

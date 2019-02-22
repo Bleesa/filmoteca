@@ -1,0 +1,325 @@
+<odoo>
+  <data>
+  <record model="ir.actions.act_window" id="provincia_list_action">
+            <field name="name">Provicias</field>
+            <field name="res_model">movimientos_aragon.provincia</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first course
+                </p>
+            </field>
+    </record>
+        <record model="ir.ui.view" id="provincia_form_view">
+            <field name="name">provincia.form</field>
+            <field name="model">movimientos_aragon.provincia</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de poblaciones">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="poblacion_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="provincia_tree_view">
+            <field name="name">provincia.tree</field>
+            <field name="model">movimientos_aragon.provincia</field>
+            <field name="arch" type="xml">
+                <tree string="Formulario de poblaciones">
+                            <field name="name" />
+                            <field name="poblacion_id"/>
+                            <field name="habitantes"/>
+                </tree>
+            </field>
+        </record>
+    
+    <record model="ir.actions.act_window" id="poblacion_list_action">
+        <field name="name">poblacion</field>
+        <field name="res_model">movimientos_aragon.poblacion</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea la primera poblacion
+                </p>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="poblacion_form_view">
+            <field name="name">poblacion.form</field>
+            <field name="model">movimientos_aragon.poblacion</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de poblaciones">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="provincia_id"/>
+                            <field name="penas_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="poblacion_tree_view">
+            <field name="name">poblacion.tree</field>
+            <field name="model">movimientos_aragon.poblacion</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de pobacion">
+                    <field name="name" />
+                    <field name="penas_id"/>
+                </tree>
+            </field>
+        </record>
+
+    <record model="ir.actions.act_window" id="peñas_list_action">
+            <field name="name">penas</field>
+            <field name="res_model">movimientos_aragon.penas</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea la primera peña
+                </p>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="peñas_form_view">
+            <field name="name">penas.form</field>
+            <field name="model">movimientos_aragon.penas</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de peñas">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="poblacion_id"/>
+                            <field name="colorPeña"/>
+                            <field name="integrantes"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="peñas_tree_view">
+            <field name="name">penas.tree</field>
+            <field name="model">movimientos_aragon.penas</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de peñas">
+                    <field name="name" />
+                    <field name="colorPeña"/>
+                    <field name="local"/>
+                </tree>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="peñas_search_view">
+            <field name="name">peñas.search</field>
+            <field name="model">movimientos_aragon.penas</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="poblacion_id"/>
+                </search>
+            </field>
+    </record>
+
+         <record model="ir.actions.act_window" id="peñistas_list_action">
+            <field name="name">Peñistas</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea el primer peñista !!
+                </p>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="peñista_form_view">
+            <field name="name">peñista.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" /> 
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Peñas">
+                        <group>
+                            <field name="peña_id"/>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+    </record>
+
+        <record model="ir.ui.view" id="peñistas_tree_view">
+            <field name="name">peñistas.tree</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                            <tree string="Listados de peñistas">
+                                <field name="name" />
+                                <field name="peña_id"/>
+                            </tree>
+            </field>
+        </record>
+    <record model="ir.actions.act_window" id="petos_list_action">
+            <field name="name">Petos</field>
+            <field name="res_model">movimientos_aragon.petos</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Elige petos! ! ! ! Funciona! 
+                </p>
+            </field>
+    </record>
+        <record model="ir.ui.view" id="petos_form_view">
+            <field name="name">petos.form</field>
+            <field name="model">movimientos_aragon.petos</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de petos">
+                    <sheet>
+                        <group>
+                            <field name="numeroDePetos" />
+                            <field name="precioUnidad" />
+                            <field name="colorPeto"/>
+                            <field name="peña_id"/>
+                            <field name="precioTotalPetos" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="petos_tree_view">
+            <field name="name">petos.tree</field>
+            <field name="model">movimientos_aragon.petos</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de petos">
+                             <field name="numeroDePetos" />
+                            <field name="colorPeto"/>
+                            <field name="peña_id"/>
+                </tree>
+            </field>
+        </record>
+    <record model="ir.actions.act_window" id="presidentes_list_action">
+            <field name="name">Presidentes</field>
+            <field name="res_model">base.entidad</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Elige los presidentes de la peña
+                </p>
+            </field>
+    </record>
+        <record model="ir.ui.view" id="presidentes_form_view">
+            <field name="name">presidentes.form</field>
+            <field name="model">base.entidad</field>
+            <field name="inherit_id" ref="baseModule.entidad_form_view" /> 
+            <field name="arch" type="xml">
+                <field name="nombreEntidad" position="after">
+                    <group>
+                    <field name="peña_id"/>
+                    <field name="añosPresidente"/>
+                    </group>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="presidentes_tree_view">
+            <field name="name">presidentes.tree</field>
+            <field name="model">base.entidad</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de presidentes">
+                    <field name="peña_id"/>
+                    <field name="añosPresidente"/>
+                </tree>
+            </field>
+        </record>
+   
+    
+
+    <menuitem name="Movimientos Aragon" id="touring_menu_root"/>
+    
+    <menuitem name="Provincias" id="touring_menu_provincias" parent="touring_menu_root"/>
+    <menuitem name="Poblaciones" id="touring_menu_poblaciones" parent="touring_menu_root"/>
+    <menuitem name="Peñas" id="touring_menu_peñas" parent="touring_menu_root"/>
+    <menuitem name="Peñistas" id="touring_menu_peñistas" parent="touring_menu_root"/>
+    <menuitem name="Petos" id="touring_menu_petos" parent="touring_menu_root"/>
+    <menuitem name="Presidentes" id="touring_menu_presidentes" parent="touring_menu_root"/>
+
+
+
+
+    
+    
+    <menuitem name="listado de provincias" id="touring_list_provincias" parent="touring_menu_provincias"
+              action="provincia_list_action"/>
+    <menuitem name="listado de poblaciones" id="touring_list_poblaciones" parent="touring_menu_poblaciones"
+              action="poblacion_list_action"/>
+    <menuitem name="listado de peñas" id="touring_list_peñas" parent="touring_menu_peñas"
+              action="peñas_list_action"/>
+    <menuitem name="listado de peñistas" id="touring_list_peñistas" parent="touring_menu_peñistas"
+              action="peñistas_list_action"/>
+    <menuitem name="listado de petos" id="touring_list_petos" parent="touring_menu_petos"
+              action="petos_list_action"/>
+    <menuitem name="listado de presidentes" id="touring_list_presidentes" parent="touring_menu_presidentes"
+              action="presidentes_list_action"/>
+
+
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="movimientos_aragon.list">
+      <field name="name">MovimientosAragon list</field>
+      <field name="model">movimientos_aragon.movimientos_aragon</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="movimientos_aragon.action_window">
+      <field name="name">MovimientosAragon window</field>
+      <field name="res_model">movimientos_aragon.movimientos_aragon</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="movimientos_aragon.action_server">
+      <field name="name">MovimientosAragon server</field>
+      <field name="model_id" ref="model_movimientos_aragon_movimientos_aragon"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="MovimientosAragon" id="movimientos_aragon.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="movimientos_aragon.menu_1" parent="movimientos_aragon.menu_root"/>
+    <menuitem name="Menu 2" id="movimientos_aragon.menu_2" parent="movimientos_aragon.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="movimientos_aragon.menu_1_list" parent="movimientos_aragon.menu_1"
+              action="movimientos_aragon.action_window"/>
+    <menuitem name="Server to list" id="movimientos_aragon" parent="movimientos_aragon.menu_2"
+              action="movimientos_aragon.action_server"/>
+    -->
+  </data>
+</odoo>
