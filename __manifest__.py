@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "MovimientosAragon",
+    'name': "FiestasPeñas,
 
     'summary': """
-        Personas en Aragon con sus localidades""",
+        Personas en Aragon """,
 
     'description': """
         Personas en Aragon con sus localidades
     """,
 
-    'author': "Jorge Rios",
+    'author': "Alberto Blesa",
     'website': "http://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
