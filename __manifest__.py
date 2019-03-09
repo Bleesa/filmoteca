@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "FiestasPeñas,
+    'name': "Filmoteca",
 
     'summary': """
-        Personas en Aragon """,
+        Gestionar la filmoteca """,
 
     'description': """
-        Personas en Aragon con sus localidades
+       gestionar la filmoteca
     """,
 
-    'author': "Alberto Blesa",
+    'author': "Alberto Blesa y Dani Alevesque",
     'website': "http://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing

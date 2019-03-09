@@ -1,76 +1,53 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api
 
-class Provincia(models.Model):
-    _name = 'movimientos_aragon.provincia'
-    name = fields.Char(string="NombrePro", required=True)
-    habitantes = fields.Integer(string="Number de habitantes",compute='_compute_habitantes')
-    poblacion_id = fields.One2many('movimientos_aragon.poblacion','provincia_id', string="Poblacion")
-    @api.multi
-    def _compute_habitantes(self):
-        for record in self:
-            record.habitantes = 25.000
 
+class Director(models.Model):
+    _inherit = 'base.entity'
+    nombre = fields.Char(string="nombre", required=True)
+    pelicula_id = fields.One2many('filmoteca.peliculas','director_id', string="peliculas")
 
-
-class Poblacion(models.Model):
-    _name = 'movimientos_aragon.poblacion'
-    name = fields.Char(string="NombrePob", required=True)
-    provincia_id = fields.Many2one('movimientos_aragon.provincia', string="Provincia")
-    penas_id = fields.One2many('movimientos_aragon.penas','poblacion_id', string="Peñas")
-
-class Petos(models.Model):
-    _name = 'movimientos_aragon.petos'
-    numeroDePetos = fields.Integer(string="Number de petos a comprar(la unidad a 10,50)")
-    precioUnidad = fields.Integer(string="Precio por unidad")
-    colorPeto = fields.Char(string="Color del peto", required=True)
-    peña_id = fields.Many2one('movimientos_aragon.penas', string="Peña")
-    precioTotalPetos = fields.Integer(string="Number de petos a comprar")
-    @api.onchange('numeroDePetos')
-    def _onchange_price(self):
-            self.precioTotalPetos =10.5*self.numeroDePetos
-
+class Peliculas(models.Model):
+    _name = 'filmoteca.peliculas'
+    titulo = fields.Char(string="titulo", required=True)
+    tematica = fields.Selection([('Horror', 'horror'), ('Comedy', 'comedy'), ('action', 'Accion')], 'Genero')
+    director_id = fields.Many2one('filmoteca.director', string="director")
+    actores_id = fields.Many2one('filmoteca.actores', string="actor")
+    salas_id = fields.Many2one('filmoteca.salas', string="sala")
+    costePelicula = fields.Integer (
+        compute="_get_costePelicula",
+        string="CostePelicula",
+        readonly=True,
+    )
+    def _get_costePelicula(self):
+        for record in Actores:
+            self.costePelicula = Actores.cache + self.costePelicula
+    
+class Actores(models.Model):
+    _inherit = 'base.entity'
+    nombre = fields.Char(string="nombre", required=True)
+    cache = fields.Integer(string="numero de cache")
+    rol = fields.Char(string="papel interpretado")
+    peliculas_id = fields.One2many('filmoteca.peliculas','actores_id', string="peliculas")
+ 
+class Salas(models.Model):
+    _inherit = 'base.empresa'
+    nombre = fields.Char(string="nombre", required=True)
+    direccion = fields.Char(string="direccion", required=True)
+    recaudacion = fields.Integer(string="recaudacion")
+    peliculas_id = fields.One2many('filmoteca.peliculas','salas_id', string="peliculas")
+    sesion_id = fields.One2many('filmoteca.sesion','sala_id', string="sesiones")
     
 
-class Penas(models.Model):
-    _name = 'movimientos_aragon.penas'
-    name = fields.Char(string="NombrePeña", required=True)
-    poblacion_id = fields.Many2one('movimientos_aragon.poblacion', string="Poblacion")
-    peñista_id = fields.One2many('res.partner','peña_id', string="Peñas")
-    petos_id = fields.One2many('movimientos_aragon.petos','peña_id', string="Petos")
-    presidentes_id = fields.One2many('base.entidad','peña_id', string="Presidentes")
-    colorPeña = fields.Char(string="Color de la peña", required=True)
-    integrantes = fields.Integer(string="Number de integrantes")
-    local = fields.Boolean('Tiene local ?', compute='_compute_local')
-    @api.multi
-    def _compute_local(self):
-        for record in self:
-            record.local = True
+class Sesion(models.Model):
+    _name = 'filmoteca.sesion'
+    horario = fields.Char(string="horario", required=True)
+    precio = fields.Integer(string="precio")
+    numeroAsistentes = fields.Integer(string="numeroAsistentes")
+    recaudacionSesion = fields.Integer(string="recaudacion")
+    @api.onchange('recaudacionSesion')
+    def _onchange_price(self):
+            self.recaudacionSesion = self.numeroAsistentes * self.precio
 
+    sala_id = fields.Many2one('filmoteca.salas', string="salas")
 
-
-class Penista(models.Model):
-    _inherit = 'res.partner'
-    poblacion_id = fields.Many2one('movimientos_aragon.poblacion', string="Poblacion")
-    peña_id = fields.Many2one('movimientos_aragon.penas', string="Peña")
-    edad = fields.Integer(string="Edad")
-
-
-class Presidentes(models.Model):
-    _inherit = 'base.entidad'
-    peña_id = fields.Many2one('movimientos_aragon.penas', string="Peña")
-    añosPresidente = fields.Integer(string="Numero de años como presidente")
-   
-
-
-# class movimientos_aragon(models.Model):
-#     _name = 'movimientos_aragon.movimientos_aragon'
-
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         self.value2 = float(self.value) / 100
